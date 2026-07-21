@@ -315,20 +315,9 @@
             <button class="tma-lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
             <button class="tma-lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
           </div>
-          <!-- DE -->
-          <button class="tma-flip-btn lang-flip-de" onclick="flipCard()" title="Rückseite anzeigen">
+          <button class="tma-flip-btn" onclick="flipCard()" title="Rückseite anzeigen">
             <span>↓</span>
             <small>Rückseite</small>
-          </button>
-          <!-- EN -->
-          <button class="tma-flip-btn lang-flip-en hidden" onclick="flipCard()" title="Show back side">
-            <span>↓</span>
-            <small>Back</small>
-          </button>
-          <!-- ES -->
-          <button class="tma-flip-btn lang-flip-es hidden" onclick="flipCard()" title="Mostrar reverso">
-            <span>↓</span>
-            <small>Reverso</small>
           </button>
         </div>
       </div>
@@ -632,20 +621,9 @@
             <button class="tma-lang-btn" onclick="setLang('en')" id="btn-back-en">EN</button>
             <button class="tma-lang-btn" onclick="setLang('es')" id="btn-back-es">ES</button>
           </div>
-          <!-- DE -->
-          <button class="tma-flip-btn lang-flip-de" onclick="flipCard()" title="Zurück zur Vorderseite">
+          <button class="tma-flip-btn" onclick="flipCard()" title="Zurück zur Vorderseite">
             <span>↑</span>
             <small>Zurück</small>
-          </button>
-          <!-- EN -->
-          <button class="tma-flip-btn lang-flip-en hidden" onclick="flipCard()" title="Back to front">
-            <span>↑</span>
-            <small>Back</small>
-          </button>
-          <!-- ES -->
-          <button class="tma-flip-btn lang-flip-es hidden" onclick="flipCard()" title="Volver al frente">
-            <span>↑</span>
-            <small>Volver</small>
           </button>
         </div>
       </div>
@@ -654,21 +632,21 @@
       <div class="lang-content" data-lang="de">
         <p class="tma-tagline">
           <strong>Qualifikationen & Expertise</strong><br>
-          Was mich berechtigt, Ihren Betrieb zu unterstützen
+          Was mich befähigt, Ihren Betrieb zu unterstützen
         </p>
       </div>
       <!-- ENGLISCH -->
       <div class="lang-content hidden" data-lang="en">
         <p class="tma-tagline">
           <strong>Qualifications & Expertise</strong><br>
-          What qualifies me to support your operation
+          What enables me to support your operation
         </p>
       </div>
       <!-- SPANISCH -->
       <div class="lang-content hidden" data-lang="es">
         <p class="tma-tagline">
           <strong>Cualificaciones y Experiencia</strong><br>
-          Lo que me califica para apoyar su operación
+          Lo que me capacita para apoyar su operación
         </p>
       </div>
 
@@ -874,15 +852,15 @@
   function setLang(lang) {
     currentLang = lang;
     document.querySelectorAll('.tma-lang-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById('btn-' + lang).classList.add('active');
-    document.getElementById('btn-back-' + lang).classList.add('active');
+    document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-back-de').classList.toggle('active', lang === 'de');
+    document.getElementById('btn-back-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-back-es').classList.toggle('active', lang === 'es');
     document.querySelectorAll('.lang-content').forEach(el => {
       el.classList.toggle('hidden', el.dataset.lang !== lang);
     });
-    document.querySelectorAll('.lang-flip-de, .lang-flip-en, .lang-flip-es').forEach(el => {
-      el.classList.add('hidden');
-    });
-    document.querySelector('.lang-flip-' + lang).classList.remove('hidden');
   }
 
   function flipCard() {
