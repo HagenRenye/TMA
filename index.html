@@ -98,6 +98,13 @@
       letter-spacing: 4px; text-transform: uppercase; margin-top: 2px;
     }
 
+    .tma-header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
     .tma-lang-switcher { display: flex; gap: 4px; }
     .tma-lang-btn {
       background: rgba(255,255,255,0.1);
@@ -114,6 +121,20 @@
       background: var(--tma-sage); color: var(--tma-navy);
       border-color: var(--tma-sage);
     }
+
+    .tma-flip-btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 8px; color: var(--tma-white);
+      font-size: 10px; font-weight: 600; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 6px 14px; gap: 2px;
+      transition: all 0.2s; z-index: 10;
+      font-family: inherit; letter-spacing: 0.5px;
+      min-width: 64px;
+    }
+    .tma-flip-btn:hover { background: rgba(255,255,255,0.3); }
+    .tma-flip-btn span { font-size: 16px; line-height: 1; }
 
     .tma-tagline {
       color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 400;
@@ -262,18 +283,6 @@
     }
     .tma-qr-label { font-size: 11px; color: #888; margin-top: 10px; }
 
-    .tma-flip-btn {
-      position: absolute; top: 16px; right: 16px;
-      width: 36px; height: 36px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 50%; color: var(--tma-white);
-      font-size: 14px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; z-index: 10;
-    }
-    .tma-flip-btn:hover { background: rgba(255,255,255,0.3); }
-
     .hidden { display: none !important; }
 
     @media (max-width: 520px) {
@@ -290,8 +299,6 @@
 
   <!-- FRONT SIDE -->
   <div id="frontSide">
-    <button class="tma-flip-btn" onclick="flipCard()" title="Mehr Details">↻</button>
-
     <div class="tma-header">
       <div class="tma-header-top">
         <div class="tma-logo-row">
@@ -302,10 +309,27 @@
             <div class="tma-full">The Meat Authority</div>
           </div>
         </div>
-        <div class="tma-lang-switcher">
-          <button class="tma-lang-btn active" onclick="setLang('de')" id="btn-de">DE</button>
-          <button class="tma-lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
-          <button class="tma-lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+        <div class="tma-header-actions">
+          <div class="tma-lang-switcher">
+            <button class="tma-lang-btn active" onclick="setLang('de')" id="btn-de">DE</button>
+            <button class="tma-lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+            <button class="tma-lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+          </div>
+          <!-- DE -->
+          <button class="tma-flip-btn lang-flip-de" onclick="flipCard()" title="Rückseite anzeigen">
+            <span>↓</span>
+            <small>Rückseite</small>
+          </button>
+          <!-- EN -->
+          <button class="tma-flip-btn lang-flip-en hidden" onclick="flipCard()" title="Show back side">
+            <span>↓</span>
+            <small>Back</small>
+          </button>
+          <!-- ES -->
+          <button class="tma-flip-btn lang-flip-es hidden" onclick="flipCard()" title="Mostrar reverso">
+            <span>↓</span>
+            <small>Reverso</small>
+          </button>
         </div>
       </div>
 
@@ -592,15 +616,72 @@
 
   <!-- BACK SIDE -->
   <div id="backSide" class="hidden">
-    <button class="tma-flip-btn" onclick="flipCard()" style="top:16px;right:16px;" title="Zurück">↩</button>
+    <div class="tma-header">
+      <div class="tma-header-top">
+        <div class="tma-logo-row">
+          <div class="tma-logo-mark">TMA</div>
+          <div class="tma-logo-text">
+            <div class="tma-brand">TMA</div>
+            <div class="tma-since">since 1986</div>
+            <div class="tma-full">The Meat Authority</div>
+          </div>
+        </div>
+        <div class="tma-header-actions">
+          <div class="tma-lang-switcher">
+            <button class="tma-lang-btn active" onclick="setLang('de')" id="btn-back-de">DE</button>
+            <button class="tma-lang-btn" onclick="setLang('en')" id="btn-back-en">EN</button>
+            <button class="tma-lang-btn" onclick="setLang('es')" id="btn-back-es">ES</button>
+          </div>
+          <!-- DE -->
+          <button class="tma-flip-btn lang-flip-de" onclick="flipCard()" title="Zurück zur Vorderseite">
+            <span>↑</span>
+            <small>Zurück</small>
+          </button>
+          <!-- EN -->
+          <button class="tma-flip-btn lang-flip-en hidden" onclick="flipCard()" title="Back to front">
+            <span>↑</span>
+            <small>Back</small>
+          </button>
+          <!-- ES -->
+          <button class="tma-flip-btn lang-flip-es hidden" onclick="flipCard()" title="Volver al frente">
+            <span>↑</span>
+            <small>Volver</small>
+          </button>
+        </div>
+      </div>
+
+      <!-- DEUTSCH -->
+      <div class="lang-content" data-lang="de">
+        <p class="tma-tagline">
+          <strong>Qualifikationen & Expertise</strong><br>
+          Was mich berechtigt, Ihren Betrieb zu unterstützen
+        </p>
+      </div>
+      <!-- ENGLISCH -->
+      <div class="lang-content hidden" data-lang="en">
+        <p class="tma-tagline">
+          <strong>Qualifications & Expertise</strong><br>
+          What qualifies me to support your operation
+        </p>
+      </div>
+      <!-- SPANISCH -->
+      <div class="lang-content hidden" data-lang="es">
+        <p class="tma-tagline">
+          <strong>Cualificaciones y Experiencia</strong><br>
+          Lo que me califica para apoyar su operación
+        </p>
+      </div>
+
+      <div class="tma-badge-row">
+        <span class="tma-badge">HACCP</span>
+        <span class="tma-badge">Lean</span>
+        <span class="tma-badge">REFA</span>
+        <span class="tma-badge">ISO 22000</span>
+      </div>
+    </div>
 
     <!-- DEUTSCH -->
     <div class="lang-content" data-lang="de">
-      <div class="tma-back-header">
-        <h2>Qualifikationen & Expertise</h2>
-        <p>Was mich berechtigt, Ihren Betrieb zu unterstützen</p>
-      </div>
-
       <div class="tma-back-body">
         <div class="tma-section-title">Zertifizierungen</div>
         <div class="tma-cert-item">
@@ -656,17 +737,12 @@
       </div>
 
       <div class="tma-footer">
-        <p>© 2026 The Meat Authority · Alle Rechte vorbehalten · ↻ für Details</p>
+        <p>© 2026 The Meat Authority · Alle Rechte vorbehalten</p>
       </div>
     </div>
 
     <!-- ENGLISCH -->
     <div class="lang-content hidden" data-lang="en">
-      <div class="tma-back-header">
-        <h2>Qualifications & Expertise</h2>
-        <p>What qualifies me to support your operation</p>
-      </div>
-
       <div class="tma-back-body">
         <div class="tma-section-title">Certifications</div>
         <div class="tma-cert-item">
@@ -722,17 +798,12 @@
       </div>
 
       <div class="tma-footer">
-        <p>© 2026 The Meat Authority · All rights reserved · ↻ for details</p>
+        <p>© 2026 The Meat Authority · All rights reserved</p>
       </div>
     </div>
 
     <!-- SPANISCH -->
     <div class="lang-content hidden" data-lang="es">
-      <div class="tma-back-header">
-        <h2>Cualificaciones y Experiencia</h2>
-        <p>Lo que me califica para apoyar su operación</p>
-      </div>
-
       <div class="tma-back-body">
         <div class="tma-section-title">Certificaciones</div>
         <div class="tma-cert-item">
@@ -788,7 +859,7 @@
       </div>
 
       <div class="tma-footer">
-        <p>© 2026 The Meat Authority · Todos los derechos reservados · ↻ para detalles</p>
+        <p>© 2026 The Meat Authority · Todos los derechos reservados</p>
       </div>
     </div>
 
@@ -804,9 +875,14 @@
     currentLang = lang;
     document.querySelectorAll('.tma-lang-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById('btn-' + lang).classList.add('active');
+    document.getElementById('btn-back-' + lang).classList.add('active');
     document.querySelectorAll('.lang-content').forEach(el => {
       el.classList.toggle('hidden', el.dataset.lang !== lang);
     });
+    document.querySelectorAll('.lang-flip-de, .lang-flip-en, .lang-flip-es').forEach(el => {
+      el.classList.add('hidden');
+    });
+    document.querySelector('.lang-flip-' + lang).classList.remove('hidden');
   }
 
   function flipCard() {
