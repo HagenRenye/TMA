@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TMA — The Meat Authority | Hagen Renye</title>
+  <meta name="description" content="Hagen Renye — Deutscher Fleischermeister, staatlich geprüfter Fleischtechniker. HACCP, Lean, REFA, Qualitätssicherung. Remote, Hybrid, weltweit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --tma-navy: #1a2744;
+      --tma-sage: #a8c5a8;
+      --tma-sage-light: #d4e4d4;
+      --tma-cream: #f5f3ef;
+      --tma-charcoal: #3d3d3d;
+      --tma-white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #e8e6e2 0%, #f5f3ef 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .tma-card {
+      max-width: 480px;
+      width: 100%;
+      background: var(--tma-white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(26,39,68,0.15), 0 8px 24px rgba(26,39,68,0.08);
+      position: relative;
+    }
+
+    .tma-header {
+      background: linear-gradient(135deg, var(--tma-navy) 0%, #2d3f5f 100%);
+      padding: 36px 28px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tma-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: rgba(168,197,168,0.08);
+      border-radius: 50%;
+    }
+
+    .tma-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tma-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .tma-logo-mark {
+      width: 52px; height: 52px;
+      background: var(--tma-white);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--tma-navy);
+      letter-spacing: -1px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .tma-logo-text { color: var(--tma-white); }
+    .tma-logo-text .tma-brand {
+      font-size: 22px; font-weight: 800; letter-spacing: 2px; line-height: 1;
+    }
+    .tma-logo-text .tma-since {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.6);
+      letter-spacing: 3px; text-transform: uppercase; margin-top: 3px;
+    }
+    .tma-logo-text .tma-full {
+      font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.45);
+      letter-spacing: 4px; text-transform: uppercase; margin-top: 2px;
+    }
+
+    .tma-lang-switcher { display: flex; gap: 4px; }
+    .tma-lang-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      font-size: 10px; font-weight: 600; padding: 5px 10px;
+      border-radius: 6px; cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.5px; font-family: inherit;
+    }
+    .tma-lang-btn:hover {
+      background: rgba(255,255,255,0.2); color: var(--tma-white);
+    }
+    .tma-lang-btn.active {
+      background: var(--tma-sage); color: var(--tma-navy);
+      border-color: var(--tma-sage);
+    }
+
+    .tma-tagline {
+      color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 400;
+      line-height: 1.6; position: relative; z-index: 1;
+    }
+    .tma-tagline strong { color: var(--tma-sage); font-weight: 600; }
+
+    .tma-badge-row {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 16px; position: relative; z-index: 1;
+    }
+    .tma-badge {
+      background: rgba(168,197,168,0.15);
+      border: 1px solid rgba(168,197,168,0.25);
+      color: var(--tma-sage-light); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 20px;
+    }
+
+    .tma-profile { padding: 24px 28px; border-bottom: 1px solid #f0eeea; }
+    .tma-name { font-size: 20px; font-weight: 700; color: var(--tma-navy); margin-bottom: 4px; }
+    .tma-title {
+      font-size: 12px; color: var(--tma-sage); font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .tma-bio {
+      font-size: 13px; color: var(--tma-charcoal); line-height: 1.7; margin-bottom: 16px;
+    }
+
+    .tma-flags { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tma-flag {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--tma-cream); padding: 6px 12px;
+      border-radius: 8px; font-size: 12px; font-weight: 500;
+      color: var(--tma-charcoal);
+    }
+    .tma-flag-icon { font-size: 16px; }
+
+    .tma-services { padding: 24px 28px; border-bottom: 1px solid #f0eeea; }
+    .tma-section-title {
+      font-size: 11px; font-weight: 700; color: var(--tma-navy);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .tma-service-list { display: flex; flex-direction: column; gap: 10px; }
+    .tma-service-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 14px; background: var(--tma-cream);
+      border-radius: 10px; transition: all 0.2s ease;
+    }
+    .tma-service-item:hover {
+      background: var(--tma-sage-light); transform: translateX(3px);
+    }
+    .tma-service-icon {
+      width: 32px; height: 32px; min-width: 32px;
+      background: var(--tma-navy); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--tma-white); font-size: 14px;
+    }
+    .tma-service-text h4 {
+      font-size: 13px; font-weight: 600; color: var(--tma-navy); margin-bottom: 2px;
+    }
+    .tma-service-text p { font-size: 12px; color: #666; line-height: 1.5; }
+
+    .tma-cta {
+      padding: 24px 28px;
+      background: linear-gradient(180deg, var(--tma-cream) 0%, var(--tma-white) 100%);
+    }
+    .tma-cta-btn {
+      display: block; width: 100%; background: var(--tma-navy);
+      color: var(--tma-white); text-align: center;
+      padding: 16px 24px; border-radius: 12px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.2s ease; position: relative; overflow: hidden;
+      font-family: inherit;
+    }
+    .tma-cta-btn::after {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    .tma-cta-btn:hover::after { left: 100%; }
+    .tma-cta-btn:hover {
+      background: #243555; transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,39,68,0.2);
+    }
+
+    .tma-contact { padding: 20px 28px; background: var(--tma-navy); color: var(--tma-white); }
+    .tma-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .tma-contact-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12px; color: rgba(255,255,255,0.8);
+    }
+    .tma-contact-item a {
+      color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s;
+    }
+    .tma-contact-item a:hover { color: var(--tma-sage); }
+    .tma-contact-icon {
+      width: 28px; height: 28px; min-width: 28px;
+      background: rgba(255,255,255,0.1); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+    }
+
+    .tma-footer {
+      padding: 14px 28px; background: #131d2e; text-align: center;
+    }
+    .tma-footer p { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
+
+    .tma-back-header {
+      background: linear-gradient(135deg, var(--tma-navy) 0%, #2d3f5f 100%);
+      padding: 28px; text-align: center;
+    }
+    .tma-back-header h2 { color: var(--tma-white); font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .tma-back-header p { color: rgba(255,255,255,0.6); font-size: 12px; }
+
+    .tma-back-body { padding: 24px 28px; }
+    .tma-cert-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid #f0eeea;
+    }
+    .tma-cert-item:last-child { border-bottom: none; }
+    .tma-cert-check {
+      width: 24px; height: 24px; min-width: 24px;
+      background: var(--tma-sage); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--tma-navy); font-size: 12px; font-weight: 700;
+    }
+    .tma-cert-text h4 { font-size: 13px; font-weight: 600; color: var(--tma-navy); }
+    .tma-cert-text p { font-size: 11px; color: #888; margin-top: 2px; }
+
+    .tma-skills-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px;
+    }
+    .tma-skill {
+      background: var(--tma-cream); padding: 10px 12px;
+      border-radius: 8px; font-size: 11px; font-weight: 600;
+      color: var(--tma-navy); text-align: center;
+    }
+
+    .tma-qr-section { text-align: center; padding: 20px 0; }
+    .tma-qr-img {
+      width: 140px; height: 140px; border-radius: 12px;
+      border: 2px solid var(--tma-cream); background: var(--tma-cream); padding: 8px;
+    }
+    .tma-qr-label { font-size: 11px; color: #888; margin-top: 10px; }
+
+    .tma-flip-btn {
+      position: absolute; top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50%; color: var(--tma-white);
+      font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; z-index: 10;
+    }
+    .tma-flip-btn:hover { background: rgba(255,255,255,0.3); }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 520px) {
+      body { padding: 10px; }
+      .tma-header { padding: 28px 20px 22px; }
+      .tma-profile, .tma-services, .tma-cta, .tma-contact, .tma-back-body { padding: 20px; }
+      .tma-contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="tma-card" id="tmaCard">
+
+  <!-- FRONT SIDE -->
+  <div id="frontSide">
+    <button class="tma-flip-btn" onclick="flipCard()" title="Mehr Details">↻</button>
+
+    <div class="tma-header">
+      <div class="tma-header-top">
+        <div class="tma-logo-row">
+          <div class="tma-logo-mark">TMA</div>
+          <div class="tma-logo-text">
+            <div class="tma-brand">TMA</div>
+            <div class="tma-since">since 1986</div>
+            <div class="tma-full">The Meat Authority</div>
+          </div>
+        </div>
+        <div class="tma-lang-switcher">
+          <button class="tma-lang-btn active" onclick="setLang('de')" id="btn-de">DE</button>
+          <button class="tma-lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+          <button class="tma-lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+        </div>
+      </div>
+
+      <!-- DEUTSCH -->
+      <div class="lang-content" data-lang="de">
+        <p class="tma-tagline">
+          <strong>Fachkompetenz seit 1986</strong><br>
+          HACCP · Lean · REFA · Qualitätssicherung
+        </p>
+      </div>
+      <!-- ENGLISCH -->
+      <div class="lang-content hidden" data-lang="en">
+        <p class="tma-tagline">
+          <strong>Technical Competence Since 1986</strong><br>
+          HACCP · Lean · REFA · Quality Assurance
+        </p>
+      </div>
+      <!-- SPANISCH -->
+      <div class="lang-content hidden" data-lang="es">
+        <p class="tma-tagline">
+          <strong>Competencia Técnica Desde 1986</strong><br>
+          HACCP · Lean · REFA · Aseguramiento de Calidad
+        </p>
+      </div>
+
+      <div class="tma-badge-row">
+        <span class="tma-badge">HACCP</span>
+        <span class="tma-badge">Lean</span>
+        <span class="tma-badge">REFA</span>
+        <span class="tma-badge">Qualitätssicherung</span>
+      </div>
+    </div>
+
+    <!-- DEUTSCH -->
+    <div class="lang-content" data-lang="de">
+      <div class="tma-profile">
+        <div class="tma-name">Hagen Renye</div>
+        <div class="tma-title">Deutscher Fleischermeister · Staatlich geprüfter Fleischtechniker</div>
+        <p class="tma-bio">
+          Seit 1986 arbeite ich als Fleischermeister für Handwerksbetriebe, Handel, Gastgewerbe und Industrie. Als staatlich geprüfter Fleischtechniker und REFA-Spezialist helfe ich durch Lean-Methoden Unternehmen, Kosten zu reduzieren und produktiver in den Markt zu gehen.
+        </p>
+        <p class="tma-bio" style="margin-top:12px;">
+          Mein Ansatz basiert auf technischer Stabilität und strenger Qualitätskontrolle. Ich arbeite eng mit den Betrieben zusammen, um die Effizienz zu maximieren, die Produktentwicklung voranzutreiben und die strikte Einhaltung der Branchenstandards zu gewährleisten.
+        </p>
+        <div class="tma-flags">
+          <div class="tma-flag"><span class="tma-flag-icon">🇩🇪</span><span>Deutschland</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇰🇭</span><span>Kambodscha</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇵🇦</span><span>Panama</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇵🇾</span><span>Paraguay</span></div>
+        </div>
+      </div>
+
+      <div class="tma-services">
+        <div class="tma-section-title">Leistungen</div>
+        <div class="tma-service-list">
+          <div class="tma-service-item">
+            <div class="tma-service-icon">🛡️</div>
+            <div class="tma-service-text">
+              <h4>HACCP & Lebensmittelsicherheit</h4>
+              <p>Implementierung, Audit-Vorbereitung, Teamschulung, Dokumentation</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">⚙️</div>
+            <div class="tma-service-text">
+              <h4>Produktionsoptimierung</h4>
+              <p>REFA-Arbeitsablaufanalyse, Ausbeute-Verbesserung, Abfallreduzierung</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">🧪</div>
+            <div class="tma-service-text">
+              <h4>Produktentwicklung</h4>
+              <p>Wurst- und Fleischwaren, Fertiggerichte und andere Lebensmittel — vom Handwerk zur Industrie</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">📋</div>
+            <div class="tma-service-text">
+              <h4>Qualitätssicherung</h4>
+              <p>HACCP, ISO 22000 — Vorbereitung, Dokumentation, Audit-Begleitung</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tma-cta">
+        <a href="mailto:Hagen.Renye@outlook.de" class="tma-cta-btn">📧 Kontakt aufnehmen</a>
+      </div>
+
+      <div class="tma-contact">
+        <div class="tma-contact-grid">
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">📱</div>
+            <a href="https://wa.me/4915237175490" target="_blank">WhatsApp</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">📧</div>
+            <a href="mailto:Hagen.Renye@outlook.de">E-Mail</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">💼</div>
+            <a href="https://linkedin.com/in/hagen-renye-681b5b365" target="_blank">LinkedIn</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">🌐</div>
+            <span>Remote, Hybrid, weltweit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tma-footer">
+        <p>© 2026 The Meat Authority · Alle Rechte vorbehalten</p>
+      </div>
+    </div>
+
+    <!-- ENGLISCH -->
+    <div class="lang-content hidden" data-lang="en">
+      <div class="tma-profile">
+        <div class="tma-name">Hagen Renye</div>
+        <div class="tma-title">German Master Butcher · State-Certified Meat Technologist</div>
+        <p class="tma-bio">
+          Since 1986, I have worked as a master butcher for craft businesses, trade, hospitality, and industry. As a state-certified meat technologist and REFA specialist, I help companies reduce costs and enter the market more productively through Lean methods.
+        </p>
+        <p class="tma-bio" style="margin-top:12px;">
+          My approach is based on technical stability and strict quality control. I work closely with operations to maximize efficiency, drive product development, and ensure strict adherence to industry standards.
+        </p>
+        <div class="tma-flags">
+          <div class="tma-flag"><span class="tma-flag-icon">🇩🇪</span><span>Germany</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇰🇭</span><span>Cambodia</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇵🇦</span><span>Panama</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇵🇾</span><span>Paraguay</span></div>
+        </div>
+      </div>
+
+      <div class="tma-services">
+        <div class="tma-section-title">Services</div>
+        <div class="tma-service-list">
+          <div class="tma-service-item">
+            <div class="tma-service-icon">🛡️</div>
+            <div class="tma-service-text">
+              <h4>HACCP & Food Safety</h4>
+              <p>Implementation, audit preparation, team training, documentation</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">⚙️</div>
+            <div class="tma-service-text">
+              <h4>Production Optimization</h4>
+              <p>REFA workflow analysis, yield improvement, waste reduction</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">🧪</div>
+            <div class="tma-service-text">
+              <h4>Product Development</h4>
+              <p>Sausage and meat products, ready meals, and other foods — from craft to industry</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">📋</div>
+            <div class="tma-service-text">
+              <h4>Quality Assurance</h4>
+              <p>HACCP, ISO 22000 — preparation, documentation, audit accompaniment</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tma-cta">
+        <a href="mailto:Hagen.Renye@outlook.de" class="tma-cta-btn">📧 Get in Touch</a>
+      </div>
+
+      <div class="tma-contact">
+        <div class="tma-contact-grid">
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">📱</div>
+            <a href="https://wa.me/4915237175490" target="_blank">WhatsApp</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">📧</div>
+            <a href="mailto:Hagen.Renye@outlook.de">Email</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">💼</div>
+            <a href="https://linkedin.com/in/hagen-renye-681b5b365" target="_blank">LinkedIn</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">🌐</div>
+            <span>Remote, Hybrid, Worldwide</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tma-footer">
+        <p>© 2026 The Meat Authority · All rights reserved</p>
+      </div>
+    </div>
+
+    <!-- SPANISCH -->
+    <div class="lang-content hidden" data-lang="es">
+      <div class="tma-profile">
+        <div class="tma-name">Hagen Renye</div>
+        <div class="tma-title">Maestro Carnicero Alemán · Técnico de Carne Certificado</div>
+        <p class="tma-bio">
+          Desde 1986 trabajo como maestro carnicero para negocios artesanales, comercio, hostelería e industria. Como técnico de carne certificado y especialista REFA, ayudo a las empresas a reducir costos y entrar al mercado más productivamente mediante métodos Lean.
+        </p>
+        <p class="tma-bio" style="margin-top:12px;">
+          Mi enfoque se basa en la estabilidad técnica y el control de calidad estricto. Trabajo estrechamente con las operaciones para maximizar la eficiencia, impulsar el desarrollo de productos y garantizar el estricto cumplimiento de los estándares de la industria.
+        </p>
+        <div class="tma-flags">
+          <div class="tma-flag"><span class="tma-flag-icon">🇩🇪</span><span>Alemania</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇰🇭</span><span>Camboya</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇵🇦</span><span>Panamá</span></div>
+          <div class="tma-flag"><span class="tma-flag-icon">🇵🇾</span><span>Paraguay</span></div>
+        </div>
+      </div>
+
+      <div class="tma-services">
+        <div class="tma-section-title">Servicios</div>
+        <div class="tma-service-list">
+          <div class="tma-service-item">
+            <div class="tma-service-icon">🛡️</div>
+            <div class="tma-service-text">
+              <h4>HACCP e Inocuidad Alimentaria</h4>
+              <p>Implementación, preparación de auditorías, capacitación de equipos, documentación</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">⚙️</div>
+            <div class="tma-service-text">
+              <h4>Optimización de Producción</h4>
+              <p>Análisis de flujo de trabajo REFA, mejora de rendimiento, reducción de desperdicio</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">🧪</div>
+            <div class="tma-service-text">
+              <h4>Desarrollo de Productos</h4>
+              <p>Embutidos y productos cárnicos, comidas preparadas y otros alimentos — del artesanal a la industria</p>
+            </div>
+          </div>
+          <div class="tma-service-item">
+            <div class="tma-service-icon">📋</div>
+            <div class="tma-service-text">
+              <h4>Aseguramiento de Calidad</h4>
+              <p>HACCP, ISO 22000 — preparación, documentación, acompañamiento de auditoría</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tma-cta">
+        <a href="mailto:Hagen.Renye@outlook.de" class="tma-cta-btn">📧 Contactar</a>
+      </div>
+
+      <div class="tma-contact">
+        <div class="tma-contact-grid">
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">📱</div>
+            <a href="https://wa.me/4915237175490" target="_blank">WhatsApp</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">📧</div>
+            <a href="mailto:Hagen.Renye@outlook.de">Correo</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">💼</div>
+            <a href="https://linkedin.com/in/hagen-renye-681b5b365" target="_blank">LinkedIn</a>
+          </div>
+          <div class="tma-contact-item">
+            <div class="tma-contact-icon">🌐</div>
+            <span>Remoto, Híbrido, Mundial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tma-footer">
+        <p>© 2026 The Meat Authority · Todos los derechos reservados</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BACK SIDE -->
+  <div id="backSide" class="hidden">
+    <button class="tma-flip-btn" onclick="flipCard()" style="top:16px;right:16px;" title="Zurück">↩</button>
+
+    <!-- DEUTSCH -->
+    <div class="lang-content" data-lang="de">
+      <div class="tma-back-header">
+        <h2>Qualifikationen & Expertise</h2>
+        <p>Was mich berechtigt, Ihren Betrieb zu unterstützen</p>
+      </div>
+
+      <div class="tma-back-body">
+        <div class="tma-section-title">Zertifizierungen</div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>Deutscher Fleischermeister</h4>
+            <p>Handwerkskammer Mannheim, 1986 · EQR Level 6 · Equivalent Bachelor</p>
+          </div>
+        </div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>Staatlich geprüfter Fleischtechniker</h4>
+            <p>Fachschule Kulmbach, 1987–1989 · EQR Level 6 · Equivalent Bachelor</p>
+          </div>
+        </div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>REFA-Fachmann für Betriebsorganisation</h4>
+            <p>REFA Darmstadt, 1994 · Prozessoptimierung</p>
+          </div>
+        </div>
+
+        <div class="tma-section-title" style="margin-top:20px;">Kernkompetenzen</div>
+        <div class="tma-skills-grid">
+          <div class="tma-skill">HACCP-Systeme</div>
+          <div class="tma-skill">Lean Management</div>
+          <div class="tma-skill">REFA-Methoden</div>
+          <div class="tma-skill">Qualitätssicherung</div>
+          <div class="tma-skill">Produktionsoptimierung</div>
+          <div class="tma-skill">Teamschulung</div>
+          <div class="tma-skill">Produktentwicklung</div>
+          <div class="tma-skill">Audit-Vorbereitung</div>
+        </div>
+
+        <div class="tma-section-title" style="margin-top:20px;">Branchen</div>
+        <div class="tma-skills-grid">
+          <div class="tma-skill">Fleischverarbeitung</div>
+          <div class="tma-skill">Hotellerie</div>
+          <div class="tma-skill">Fertiggerichte</div>
+          <div class="tma-skill">Bäckerei</div>
+          <div class="tma-skill">Gastronomie</div>
+          <div class="tma-skill">Handel</div>
+        </div>
+
+        <div class="tma-qr-section">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AHagen%20Renye%0AORG%3AThe%20Meat%20Authority%0ATITLE%3ADeutscher%20Fleischermeister%2C%20Staatlich%20gepr%C3%BCfter%20Fleischtechniker%0ATEL%3A%2B4915237175490%0AEMAIL%3AHagen.Renye%40outlook.de%0AURL%3Ahttps%3A%2F%2Flinkedin.com%2Fin%2Fhagen-renye-681b5b365%0ANOTE%3ARemote%2C%20Hybrid%2C%20weltweit%20verf%C3%BCgbar%0AEND%3AVCARD" alt="QR-Code Kontakt" class="tma-qr-img">
+          <p class="tma-qr-label">Kontakt scannen oder speichern</p>
+        </div>
+
+        <a href="mailto:Hagen.Renye@outlook.de" class="tma-cta-btn" style="margin-top:8px;">💾 Kontakt speichern</a>
+      </div>
+
+      <div class="tma-footer">
+        <p>© 2026 The Meat Authority · Alle Rechte vorbehalten · ↻ für Details</p>
+      </div>
+    </div>
+
+    <!-- ENGLISCH -->
+    <div class="lang-content hidden" data-lang="en">
+      <div class="tma-back-header">
+        <h2>Qualifications & Expertise</h2>
+        <p>What qualifies me to support your operation</p>
+      </div>
+
+      <div class="tma-back-body">
+        <div class="tma-section-title">Certifications</div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>German Master Butcher</h4>
+            <p>Chamber of Crafts Mannheim, 1986 · EQR Level 6 · Bachelor Equivalent</p>
+          </div>
+        </div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>State-Certified Meat Technologist</h4>
+            <p>Technical School Kulmbach, 1987–1989 · EQR Level 6 · Bachelor Equivalent</p>
+          </div>
+        </div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>REFA Specialist for Operations</h4>
+            <p>REFA Darmstadt, 1994 · Process Optimization</p>
+          </div>
+        </div>
+
+        <div class="tma-section-title" style="margin-top:20px;">Core Competencies</div>
+        <div class="tma-skills-grid">
+          <div class="tma-skill">HACCP Systems</div>
+          <div class="tma-skill">Lean Management</div>
+          <div class="tma-skill">REFA Methods</div>
+          <div class="tma-skill">Quality Assurance</div>
+          <div class="tma-skill">Production Optimization</div>
+          <div class="tma-skill">Team Training</div>
+          <div class="tma-skill">Product Development</div>
+          <div class="tma-skill">Audit Preparation</div>
+        </div>
+
+        <div class="tma-section-title" style="margin-top:20px;">Industries</div>
+        <div class="tma-skills-grid">
+          <div class="tma-skill">Meat Processing</div>
+          <div class="tma-skill">Hotel Industry</div>
+          <div class="tma-skill">Ready Meals</div>
+          <div class="tma-skill">Bakery</div>
+          <div class="tma-skill">HORECA</div>
+          <div class="tma-skill">Trade</div>
+        </div>
+
+        <div class="tma-qr-section">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AHagen%20Renye%0AORG%3AThe%20Meat%20Authority%0ATITLE%3AGerman%20Master%20Butcher%2C%20State-Certified%20Meat%20Technologist%0ATEL%3A%2B4915237175490%0AEMAIL%3AHagen.Renye%40outlook.de%0AURL%3Ahttps%3A%2F%2Flinkedin.com%2Fin%2Fhagen-renye-681b5b365%0ANOTE%3ARemote%2C%20Hybrid%2C%20Worldwide%0AEND%3AVCARD" alt="QR Code Contact" class="tma-qr-img">
+          <p class="tma-qr-label">Scan or save contact</p>
+        </div>
+
+        <a href="mailto:Hagen.Renye@outlook.de" class="tma-cta-btn" style="margin-top:8px;">💾 Save Contact</a>
+      </div>
+
+      <div class="tma-footer">
+        <p>© 2026 The Meat Authority · All rights reserved · ↻ for details</p>
+      </div>
+    </div>
+
+    <!-- SPANISCH -->
+    <div class="lang-content hidden" data-lang="es">
+      <div class="tma-back-header">
+        <h2>Cualificaciones y Experiencia</h2>
+        <p>Lo que me califica para apoyar su operación</p>
+      </div>
+
+      <div class="tma-back-body">
+        <div class="tma-section-title">Certificaciones</div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>Maestro Carnicero Alemán</h4>
+            <p>Cámara de Artesanía Mannheim, 1986 · EQR Nivel 6 · Equivalente a Licenciatura</p>
+          </div>
+        </div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>Técnico de Carne Certificado</h4>
+            <p>Escuela Técnica Kulmbach, 1987–1989 · EQR Nivel 6 · Equivalente a Licenciatura</p>
+          </div>
+        </div>
+        <div class="tma-cert-item">
+          <div class="tma-cert-check">✓</div>
+          <div class="tma-cert-text">
+            <h4>Especialista REFA en Operaciones</h4>
+            <p>REFA Darmstadt, 1994 · Optimización de Procesos</p>
+          </div>
+        </div>
+
+        <div class="tma-section-title" style="margin-top:20px;">Competencias Principales</div>
+        <div class="tma-skills-grid">
+          <div class="tma-skill">Sistemas HACCP</div>
+          <div class="tma-skill">Lean Management</div>
+          <div class="tma-skill">Métodos REFA</div>
+          <div class="tma-skill">Aseguramiento de Calidad</div>
+          <div class="tma-skill">Optimización de Producción</div>
+          <div class="tma-skill">Capacitación</div>
+          <div class="tma-skill">Desarrollo de Productos</div>
+          <div class="tma-skill">Preparación de Auditoría</div>
+        </div>
+
+        <div class="tma-section-title" style="margin-top:20px;">Industrias</div>
+        <div class="tma-skills-grid">
+          <div class="tma-skill">Procesamiento de Carne</div>
+          <div class="tma-skill">Hotelería</div>
+          <div class="tma-skill">Comidas Preparadas</div>
+          <div class="tma-skill">Panadería</div>
+          <div class="tma-skill">HORECA</div>
+          <div class="tma-skill">Comercio</div>
+        </div>
+
+        <div class="tma-qr-section">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AHagen%20Renye%0AORG%3AThe%20Meat%20Authority%0ATITLE%3AMaestro%20Carnicero%20Alem%C3%A1n%2C%20T%C3%A9cnico%20de%20Carne%20Certificado%0ATEL%3A%2B4915237175490%0AEMAIL%3AHagen.Renye%40outlook.de%0AURL%3Ahttps%3A%2F%2Flinkedin.com%2Fin%2Fhagen-renye-681b5b365%0ANOTE%3ARemoto%2C%20H%C3%ADbrido%2C%20Mundial%0AEND%3AVCARD" alt="Código QR Contacto" class="tma-qr-img">
+          <p class="tma-qr-label">Escanear o guardar contacto</p>
+        </div>
+
+        <a href="mailto:Hagen.Renye@outlook.de" class="tma-cta-btn" style="margin-top:8px;">💾 Guardar Contacto</a>
+      </div>
+
+      <div class="tma-footer">
+        <p>© 2026 The Meat Authority · Todos los derechos reservados · ↻ para detalles</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  let currentLang = 'de';
+  let isFlipped = false;
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.tma-lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('btn-' + lang).classList.add('active');
+    document.querySelectorAll('.lang-content').forEach(el => {
+      el.classList.toggle('hidden', el.dataset.lang !== lang);
+    });
+  }
+
+  function flipCard() {
+    isFlipped = !isFlipped;
+    document.getElementById('frontSide').classList.toggle('hidden', isFlipped);
+    document.getElementById('backSide').classList.toggle('hidden', !isFlipped);
+  }
+</script>
+
+</body>
+</html>
