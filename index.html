@@ -315,9 +315,17 @@
             <button class="tma-lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
             <button class="tma-lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
           </div>
-          <button class="tma-flip-btn" onclick="flipCard()" title="Rückseite anzeigen">
+          <button class="tma-flip-btn flip-front-de" onclick="flipCard()">
             <span>↓</span>
             <small>Rückseite</small>
+          </button>
+          <button class="tma-flip-btn flip-front-en hidden" onclick="flipCard()">
+            <span>↓</span>
+            <small>Back</small>
+          </button>
+          <button class="tma-flip-btn flip-front-es hidden" onclick="flipCard()">
+            <span>↓</span>
+            <small>Reverso</small>
           </button>
         </div>
       </div>
@@ -621,9 +629,17 @@
             <button class="tma-lang-btn" onclick="setLang('en')" id="btn-back-en">EN</button>
             <button class="tma-lang-btn" onclick="setLang('es')" id="btn-back-es">ES</button>
           </div>
-          <button class="tma-flip-btn" onclick="flipCard()" title="Zurück zur Vorderseite">
+          <button class="tma-flip-btn flip-back-de" onclick="flipCard()">
             <span>↑</span>
             <small>Zurück</small>
+          </button>
+          <button class="tma-flip-btn flip-back-en hidden" onclick="flipCard()">
+            <span>↑</span>
+            <small>Back</small>
+          </button>
+          <button class="tma-flip-btn flip-back-es hidden" onclick="flipCard()">
+            <span>↑</span>
+            <small>Volver</small>
           </button>
         </div>
       </div>
@@ -861,6 +877,14 @@
     document.querySelectorAll('.lang-content').forEach(el => {
       el.classList.toggle('hidden', el.dataset.lang !== lang);
     });
+    document.querySelectorAll('.flip-front-de, .flip-front-en, .flip-front-es').forEach(el => {
+      el.classList.add('hidden');
+    });
+    document.querySelector('.flip-front-' + lang).classList.remove('hidden');
+    document.querySelectorAll('.flip-back-de, .flip-back-en, .flip-back-es').forEach(el => {
+      el.classList.add('hidden');
+    });
+    document.querySelector('.flip-back-' + lang).classList.remove('hidden');
   }
 
   function flipCard() {
